@@ -22,8 +22,8 @@ class BooksApp extends React.Component {
     }
   };
 
-  async componentDidMount() {
-   await BooksAPI.getAll().then(books => {
+ componentDidMount() {
+    BooksAPI.getAll().then(books => {
       this.setState({ myBooks: books })
     })
   };
@@ -78,9 +78,9 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <div>
                 
-                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'read')} atualiza={this.update} teste= 'read'/>
-                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'currentlyReading')} atualiza={this.update.bind(this)}/>
-                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'wantToRead')} atualiza={this.update.bind(this)}/>
+                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'read')} atualiza={this.update} teste= "Read" />
+                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'currentlyReading')} atualiza={this.update.bind(this)} teste= 'Currently Reading'/>
+                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'wantToRead')} atualiza={this.update.bind(this)} teste= 'Want To Read'/>
                   
               </div>
             </div>

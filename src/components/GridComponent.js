@@ -2,13 +2,15 @@ import React from 'react'
 import Book from './Book'
 import PropTypes from 'prop-types'
 
-const gridComponent = ({books = []}, teste, atualiza) => {
-
+const gridComponent = ({books = []}, atualiza,teste) => {
+    console.log(teste);
+    console.log(atualiza);
+    console.log(books);
     return(
 
         
             <div className="bookshelf">
-                <h2 className="bookshelf-title">teste</h2>
+                <h2 className="bookshelf-title">{teste}</h2>
                 <div className="bookshelf-books">
                 <ol className="books-grid">
                     {books.map((book)=>
