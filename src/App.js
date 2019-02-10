@@ -28,7 +28,6 @@ class BooksApp extends React.Component {
       this.setState({
         myBooks: this.state.myBooks.filter(b => b.id !== book.id).concat(book)
       })
-      this.showAlert(book.title, shelf)
     })
   };
 
@@ -71,11 +70,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                
-                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'read')} atualiza={this.update} teste= "Read" />
-                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'currentlyReading')} atualiza={this.update.bind(this)} teste= 'Currently Reading'/>
-                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'wantToRead')} atualiza={this.update.bind(this)} teste= 'Want To Read'/>
-                  
+                <GridComponent key="currentlyReading" books={this.state.myBooks.filter(book => book.shelf === 'currentlyReading')} atualiza={this.update.bind(this)} teste= 'Currently Reading'/>
+                <GridComponent key="wantToRead" books={this.state.myBooks.filter(book => book.shelf === 'wantToRead')} atualiza={this.update.bind(this)} teste= 'Want To Read'/>
+                <GridComponent key="read" books={this.state.myBooks.filter(book => book.shelf === 'read')} atualiza={this.update} teste= "Read" />   
               </div>
             </div>
             <div className="open-search">

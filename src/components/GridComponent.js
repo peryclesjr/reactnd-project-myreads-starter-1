@@ -1,34 +1,36 @@
 import React from 'react'
 import Book from './Book'
-import PropTypes from 'prop-types'
 
-const gridComponent = ({books = []}, atualiza,teste) => {
-    console.log(teste);
-    console.log(atualiza);
-    console.log(books);
-    return(
+// const gridComponent = ({books = []}, atualiza,teste) => {
+//     console.log(teste);
+//     console.log(atualiza);
+//     console.log(books);
 
-        
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">{teste}</h2>
-                <div className="bookshelf-books">
-                <ol className="books-grid">
-                    {books.map((book)=>
-                        <li>
-                            <Book book={book} update={atualiza}/>                        
-                        </li>
 
-                    )}
-                </ol>
+class gridComponent extends React.Component {
+
+
+    render(){
+        return(
+
+            
+                <div className="bookshelf">
+                    <h2 className="bookshelf-title">{this.props.teste}</h2>
+                    <div className="bookshelf-books">
+                    <ol className="books-grid">
+                        {this.props.books.map((book)=>
+                            <li key={book.id}>
+                                <Book  book={book} update={this.props.atualiza}/>                        
+                            </li>
+
+                        )}
+                    </ol>
+                    </div>
                 </div>
-            </div>
 
-        )
+            )
+    }
 };
-gridComponent.propTypes = {
-    myBooks: PropTypes.array.isRequired,
-    update: PropTypes.func.isRequired, 
-    teste:PropTypes.string.isRequired, 
-  }
+
 
 export default gridComponent;
