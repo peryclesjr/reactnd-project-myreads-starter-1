@@ -1,8 +1,8 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Book from './components/Book'
 import GridComponent from './components/GridComponent'
+
 
 class BooksApp extends React.Component {
   state = {
@@ -14,6 +14,37 @@ class BooksApp extends React.Component {
      */
     showSearchPage: false
   }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      myBooks: []
+    }
+  };
+
+  async componentDidMount() {
+   await BooksAPI.getAll().then(books => {
+      this.setState({ myBooks: books })
+    })
+  };
+
+  update = (book, shelf) => {
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf
+      this.setState({
+        myBooks: this.state.myBooks.filter(b => b.id !== book.id).concat(book)
+      })
+      this.showAlert(book.title, shelf)
+    })
+  };
+
+  alertOptions = {
+    offset: 14,
+    position: 'top right',
+    theme: 'dark',
+    time: 100,
+    transition: 'scale'
+  };
 
   render() {
     return (
@@ -46,36 +77,11 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <li>
-                        <Book  titleBook="To Kill a Mockingbird" authorsName="Harper Lee" url="http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api"/>
-                      </li>
-                      <li>
-                        <Book titleBook="Ender's Game" authorsName="Orson Scott Card" url="http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api"/>
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <GridComponent/>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <li>
-                        <Book titleBook="The Hobbit" authorsName="J.R.R. Tolkien" url="http://books.google.com/books/content?id=pD6arNyKyi8C&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE70Rw0CCwNZh0SsYpQTkMbvz23npqWeUoJvVbi_gXla2m2ie_ReMWPl0xoU8Quy9fk0Zhb3szmwe8cTe4k7DAbfQ45FEzr9T7Lk0XhVpEPBvwUAztOBJ6Y0QPZylo4VbB7K5iRSk&source=gbs_api"/>
-                      </li>  
-                      <li>
-                        <Book titleBook="Oh, the Places You'll Go!" authorsName="Seuss" url="http://books.google.com/books/content?id=1q_xAwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE712CA0cBYP8VKbEcIVEuFJRdX1k30rjLM29Y-dw_qU1urEZ2cQ42La3Jkw6KmzMmXIoLTr50SWTpw6VOGq1leINsnTdLc_S5a5sn9Hao2t5YT7Ax1RqtQDiPNHIyXP46Rrw3aL8&source=gbs_api"/>
-                      </li>
-                      <li>
-                        <Book titleBook="The Adventures of Tom Sawyer" authorsName="Mark Twain" url="http://books.google.com/books/content?id=32haAAAAMAAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72yckZ5f5bDFVIf7BGPbjA0KYYtlQ__nWB-hI_YZmZ-fScYwFy4O_fWOcPwf-pgv3pPQNJP_sT5J_xOUciD8WaKmevh1rUR-1jk7g1aCD_KeJaOpjVu0cm_11BBIUXdxbFkVMdi&source=gbs_api"/>
-                      </li>  
-                    </ol>
-                  </div>
-                </div>
+                
+                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'read')} atualiza={this.update} teste= 'read'/>
+                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'currentlyReading')} atualiza={this.update.bind(this)}/>
+                <GridComponent books={this.state.myBooks.filter(book => book.shelf === 'wantToRead')} atualiza={this.update.bind(this)}/>
+                  
               </div>
             </div>
             <div className="open-search">
