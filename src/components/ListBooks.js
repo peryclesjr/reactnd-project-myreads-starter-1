@@ -2,7 +2,7 @@ import React from 'react'
 import Book from './Book'
 import Prototypes from 'prop-types'
 
- const gridComponent = (props) => {
+ const listBooks = (props) => {
 //     console.log(teste);
 //     console.log(atualiza);
 //     console.log(books);
@@ -32,11 +32,11 @@ import Prototypes from 'prop-types'
     
 };
 
-gridComponent.prototypes = {
+listBooks.prototypes = {
  mybooks:Prototypes.array.isRequired,
  atualiza:Prototypes.func.isRequired
 
 }
 
 
-export default gridComponent;
+export default listBooks;

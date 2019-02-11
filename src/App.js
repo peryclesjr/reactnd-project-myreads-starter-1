@@ -1,8 +1,10 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import GridComponent from './components/GridComponent'
-
+import ListAllBookshelves from './components/ListAllBookShelves'
+import { BrowserRouter,Route, Switch } from 'react-router-dom'
+import SearchBooks from './components/SearchBooks'
+import Router from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -67,17 +69,22 @@ class BooksApp extends React.Component {
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <GridComponent key="currentlyReading" books={this.state.myBooks.filter(book => book.shelf === 'currentlyReading')} atualiza={this.update.bind(this)} teste= 'Currently Reading'/>
-                <GridComponent key="wantToRead" books={this.state.myBooks.filter(book => book.shelf === 'wantToRead')} atualiza={this.update.bind(this)} teste= 'Want To Read'/>
-                <GridComponent key="read" books={this.state.myBooks.filter(book => book.shelf === 'read')} atualiza={this.update} teste= "Read" />   
+            </div>  
+            
+            <Route exact path="/" render={() => (
+                <ListAllBookshelves myBooks={this.state.myBooks} update={this.update} />
+              )}
+            />
+            {/* <Route path="/search" render={() => (
+                <SearchBooks books={this.state.myBooks} update={this.update} />
+              )}
+            />  */}
+            {/* //<Route component={NotFound} /> */}
+        
+              <div className="open-search">
+                <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
               </div>
-            </div>
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
+           
           </div>
         )}
       </div>
