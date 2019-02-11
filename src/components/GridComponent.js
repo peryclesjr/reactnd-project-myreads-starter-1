@@ -32,7 +32,7 @@ import Prototypes from 'prop-types'
     
 };
 
-gridComponent.Prototypes = {
+gridComponent.prototypes = {
  mybooks:Prototypes.array.isRequired,
  atualiza:Prototypes.func.isRequired
 

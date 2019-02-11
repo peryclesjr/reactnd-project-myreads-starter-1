@@ -28,7 +28,7 @@ const books = (props)=> {
         
 };
 
-books.Prototypes ={
+books.prototypes ={
 
     book :Prototypes.shape({
         smallThumbnail:Prototypes.object,
