@@ -1,21 +1,18 @@
 import React from 'react';
+import Prototypes from 'prop-types'
 
-//const books = ({ book, update })=> {
-    class books extends React.Component {
+const books = (props)=> {
+   // class books extends React.Component {
 
-        state = {
-          myBooks: this.props.book,
-        }
-
-      render(){
+   
     
             return(
                 <div className="book">
                     <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${this.props.book.imageLinks.smallThumbnail})` }}> </div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${props.book.imageLinks.smallThumbnail})` }}> </div>
                     <div className="book-shelf-changer">
-                        <select value={this.props.book.shelf || 'none'}
-                            onChange={(event) => this.props.update(this.props.book, event.target.value)}>
+                        <select value={props.book.shelf || 'none'}
+                            onChange={(event) => props.update(props.book, event.target.value)}>
                             <option value="move" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
@@ -24,13 +21,23 @@ import React from 'react';
                         </select>
                     </div>
                     </div>
-                    <div className="book-title">{this.props.book.titlek}</div>
-                    <div className="book-authors">{this.props.book.authors}</div>
+                    <div className="book-title">{props.book.title}</div>
+                    <div className="book-authors">{props.book.authors}</div>
                 </div>
             )
-        }
+        
 };
 
+books.Prototypes ={
+
+    book :Prototypes.shape({
+        smallThumbnail:Prototypes.object,
+        authors:Prototypes.array,
+        title: Prototypes.string
+     } ),
+     update: Prototypes.func.isRequired
+
+}
 
 
 export default books;

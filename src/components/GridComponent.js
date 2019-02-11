@@ -1,26 +1,26 @@
 import React from 'react'
 import Book from './Book'
+import Prototypes from 'prop-types'
 
-// const gridComponent = ({books = []}, atualiza,teste) => {
+ const gridComponent = (props) => {
 //     console.log(teste);
 //     console.log(atualiza);
 //     console.log(books);
 
 
-class gridComponent extends React.Component {
+//class gridComponent extends React.Component {
 
 
-    render(){
         return(
 
             
                 <div className="bookshelf">
-                    <h2 className="bookshelf-title">{this.props.teste}</h2>
+                    <h2 className="bookshelf-title">{props.teste}</h2>
                     <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {this.props.books.map((book)=>
+                        {props.books.map((book)=>
                             <li key={book.id}>
-                                <Book  book={book} update={this.props.atualiza}/>                        
+                                <Book  book={book} update={props.atualiza}/>                        
                             </li>
 
                         )}
@@ -29,8 +29,14 @@ class gridComponent extends React.Component {
                 </div>
 
             )
-    }
+    
 };
+
+gridComponent.Prototypes = {
+ mybooks:Prototypes.array.isRequired,
+ atualiza:Prototypes.func.isRequired
+
+}
 
 
 export default gridComponent;
