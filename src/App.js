@@ -42,13 +42,9 @@ class BooksApp extends React.Component {
         </div>
         <Switch>
           <Route exact path="/" render={() => (
-            <ListAllBookshelves myBooks={this.state.myBooks} update={this.update} showBooks={true} />
-          )}
-          />
+            <ListAllBookshelves myBooks={this.state.myBooks} update={this.update} showBooks={true} />)}/>
           <Route path="/search" render={() => (
-            <SearchBooks books={this.state.myBooks} update={this.update} showBooks={false} />
-          )}
-          />
+            <SearchBooks books={this.state.myBooks} update={this.update} showBooks={false} />)}/>
           <Redirect from="*" to="/" />
         </Switch>
         <div className="open-search">
