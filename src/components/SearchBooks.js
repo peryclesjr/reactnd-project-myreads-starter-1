@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import * as BooksAPI from '../BooksAPI'
 import ListBook  from './ListBooks'
 import NotFound from './NotFound';
-import PropTypes from 'props-types'
+import PropTypes from 'prop-types'
 
 
 class SearchBooks extends Component {
