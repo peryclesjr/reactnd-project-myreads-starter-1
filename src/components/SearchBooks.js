@@ -9,8 +9,7 @@ import PropTypes from 'prop-types'
 class SearchBooks extends Component {
   state = {
     query: '',
-    searchedBooks: [],
-    loading: false
+    searchedBooks: []
   }
 
   clearQuery() {
@@ -18,7 +17,7 @@ class SearchBooks extends Component {
   }
 
   search = query => {
-    this.setState({ query: query, loading: true })
+    this.setState({ query: query })
     if (query) {
       BooksAPI.search(query).then(searchedBooks => {
         if (!searchedBooks.error) {

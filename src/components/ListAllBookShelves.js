@@ -15,19 +15,11 @@ const ListAllBookshelves = (props) => {
   </div>
   )
 
-  let showFind = (
-    <ListBooks key="results" books={props.myBooks} atualiza={props.update} title= "Results" />   
-  )
   if (props.showBooks){
     return (
       showMybooks
     )
-  }else if(!props.showBooks){
-    return (
-      showFind
-    )
-    
-  };
+  }
 }
 
 ListAllBookshelves.propTypes = {
