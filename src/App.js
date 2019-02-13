@@ -2,7 +2,7 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import ListAllBookshelves from './components/ListAllBookShelves'
-import { Route,Switch, Link } from 'react-router-dom'
+import { Route, Switch, Link, Redirect } from 'react-router-dom'
 import SearchBooks from './components/SearchBooks'
 
 class BooksApp extends React.Component {
@@ -10,7 +10,7 @@ class BooksApp extends React.Component {
     myBooks: [],
   }
 
- componentDidMount() {
+  componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ myBooks: books })
     })
@@ -39,39 +39,33 @@ class BooksApp extends React.Component {
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>
-              <div className="search-books-input-wrapper">
-
-                <input type="text" placeholder="Search by title or author"/>
-
-              </div>
-            </div>
+              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>            </div>
             <div className="search-books-results">
               <ol className="books-grid"></ol>
             </div>
           </div>
         ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>  
-            <Switch>
-              <Route exact path="/" render={() => (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <Switch>
+                <Route exact path="/" render={() => (
                   <ListAllBookshelves myBooks={this.state.myBooks} update={this.update} showBooks={true} />
                 )}
-              />
-            <Route path="/search" render={() => (
-                  <SearchBooks books={this.state.myBooks} update={this.update}  showBooks={false} />
+                />
+                <Route path="/search" render={() => (
+                  <SearchBooks books={this.state.myBooks} update={this.update} showBooks={false} />
                 )}
-              /> 
-            {/* //<Route component={NotFound} /> */}
-            </Switch>
+                />
+                <Redirect from="*" to="/" />
+              </Switch>
               <div className="open-search">
-                 <Link to="/search"> Add a book </Link>
+                <Link to="/search"> Add a book </Link>
               </div>
-           
-          </div>
-        )}
+
+            </div>
+          )}
       </div>
     )
   }
