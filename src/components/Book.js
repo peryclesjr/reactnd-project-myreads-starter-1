@@ -1,5 +1,6 @@
 import React from 'react';
 import Prototypes from 'prop-types'
+import thumb from '../icons/book-cover.jpg'
 
 const books = (props)=> {
    // class books extends React.Component {
@@ -9,7 +10,8 @@ const books = (props)=> {
             return(
                 <div className="book">
                     <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:`url(${props.book.imageLinks.smallThumbnail})` }}> </div>
+                    <div className="book-cover"
+                     style={{ width: 128, height: 193, backgroundImage:`url(${ props.book.imageLinks? props.book.imageLinks.smallThumbnail : thumb})` }}> </div>
                     <div className="book-shelf-changer">
                         <select value={props.book.shelf || 'none'}
                             onChange={(event) => props.update(props.book, event.target.value)}>
