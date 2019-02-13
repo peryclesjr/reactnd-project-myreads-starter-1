@@ -35,37 +35,25 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-      <div className="app">
-        {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <button className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</button>            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
-        ) : (
-            <div className="list-books">
-              <div className="list-books-title">
-                <h1>MyReads</h1>
-              </div>
-              <Switch>
-                <Route exact path="/" render={() => (
-                  <ListAllBookshelves myBooks={this.state.myBooks} update={this.update} showBooks={true} />
-                )}
-                />
-                <Route path="/search" render={() => (
-                  <SearchBooks books={this.state.myBooks} update={this.update} showBooks={false} />
-                )}
-                />
-                <Redirect from="*" to="/" />
-              </Switch>
-              <div className="open-search">
-                <Link to="/search"> Add a book </Link>
-              </div>
 
-            </div>
+      <div className="list-books">
+        <div className="list-books-title">
+          <h1>MyReads</h1>
+        </div>
+        <Switch>
+          <Route exact path="/" render={() => (
+            <ListAllBookshelves myBooks={this.state.myBooks} update={this.update} showBooks={true} />
           )}
+          />
+          <Route path="/search" render={() => (
+            <SearchBooks books={this.state.myBooks} update={this.update} showBooks={false} />
+          )}
+          />
+          <Redirect from="*" to="/" />
+        </Switch>
+        <div className="open-search">
+          <Link to="/search"> Add a book </Link>
+        </div>
       </div>
     )
   }

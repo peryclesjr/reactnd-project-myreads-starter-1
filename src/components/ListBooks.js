@@ -3,13 +3,6 @@ import Book from './Book'
 import Prototypes from 'prop-types'
 
  const listBooks = (props) => {
-//     console.log(teste);
-//     console.log(atualiza);
-//     console.log(books);
-
-
-//class gridComponent extends React.Component {
-
 
     let show =(
         <div className="bookshelf">
