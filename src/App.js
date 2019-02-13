@@ -7,7 +7,7 @@ import SearchBooks from './components/SearchBooks'
 
 class BooksApp extends React.Component {
   state = {
-    myBooks: [],
+    myBooks: []
   }
 
   componentDidMount() {
@@ -23,14 +23,6 @@ class BooksApp extends React.Component {
         myBooks: this.state.myBooks.filter(b => b.id !== book.id).concat(book)
       })
     })
-  };
-
-  alertOptions = {
-    offset: 14,
-    position: 'top right',
-    theme: 'dark',
-    time: 100,
-    transition: 'scale'
   };
 
   render() {
